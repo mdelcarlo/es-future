@@ -1,3 +1,7 @@
+# Arrow function
+
+A shortcut for creating anonymous functions with `this` scope bound.
+
 Let's rewrite this sum function to the arrow function style. Let's say sum is numA numB and then the fat arrow with some braces and return numA + numB. Now, that actually looks about the same.
 
 ```javascript
@@ -21,18 +25,18 @@ var arrowSum = (numA, numB) => numA + numB;
 Second, if there's only one parameter, like you only take in one num, you can actually get rid of the surrounding parens here and just say num would return num, or num would return 3, or whatever you want it to return. That's why you'll see something like var squared is X, which returns X \* X to be X squared.
 
 ```javascript
-var arrowSum = years => "hello";
+var arrowSum = num => num;
 
 
 var squared = x => x \* x;
 ```
 
-An extremely common scenario that you've probably run into before whether though click handlers or anything else is that, you write a function to handle some sort of action and you write the body of the function, and you run into the scenario where you'll assign that = this because you actually want to get the years off of the parent scope.
+An extremely common scenario that you've probably run into before whether though click handlers or anything else is that, you write a function to handle some sort of action and you write the body of the function, and you run into the scenario where you'll assign that = this because you actually want to get the age off of the parent scope.
 
 ```javascript
 var grandma = {
   name: "Judith",
-  years: 60,
+  age: 60,
 
   handleAddYears: function(years, add) {
     add(years);
@@ -41,10 +45,10 @@ var grandma = {
   updateAge: function() {
     var that = this;
 
-    this.handleAddYears(3, function(newYears) {
-      that.years;
+    this.handleAddYears(3, function(years) {
+      that.age;
 
-      console.log(newYears + that.years);
+      console.log(years + that.age);
     });
   }
 };
@@ -57,8 +61,8 @@ Now, the arrow function actually helps handle this scenario. I'm going to delete
 
 ```javascript
 updateAge: function () {
-    this.handleAddYears(3, (newYears) => {
-        console.log(newYears + this.years);
+    this.handleAddYears(3, (years) => {
+        console.log(years + this.age);
     })
 }
 ```
@@ -70,8 +74,8 @@ Again, if you'd prefer to do this in one line of code, we can delete this brace 
 ```javascript
 updateAge: function () {
 
-this.handleAddYears( 3, newYears => console.log(newYears + this.years))
+this.handleAddYears( 3, years => console.log(years + this.age))
 }
 ```
 
-When I run this, you can see it prints out 63 because this is actually this handler right here and it's getting this years through here, which is coming from here. When the years goes here to here to here, down into our arrow function, I add it to this years, and this.years is this years now...
+When I run this, you can see it prints out 63 because this is actually this handler right here and it's getting this age through here, which is coming from here. When the age goes here to here to here, down into our arrow function, I add it to this age, and this.age is this age now...
