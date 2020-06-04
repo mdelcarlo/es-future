@@ -1,128 +1,74 @@
-# Rest parameters
+# Template strings
 
-The rest parameter syntax allows us to represent an indefinite number of arguments as an array.
-
-If we take a look at the arguments keyword in ES5. What the arguments keyword does is return back to us an array like object of all the arguments that we're passing to our function. To see a simple example of this, let's go ahead and create myfunc(), and just console log out the arguments keyword of that function. Down below we'll call myfunc with arguments one, two, three, and run that to see what the console output is.
+If you have ever worked with strings in JavaScript, you've most likely concatenated two strings by just saying the variable then plus and then adding a string to it.
 
 ```javascript
-function logArgs() {
-  console.log(arguments);
-}
-
-logArgs(1, 2, 3);
-//[object Arguments] {
-//  0: 1,
-//  1: 2,
-//  2: 3
-//}
+var name = "Carol";
+var action = "walking";
+var activity = name + " is " + action;
+console.log(activity);
 ```
 
-As you can see, we're returned back an array like object with all of the arguments that were passed into the function. Because it is array like, there's certain properties that are available to us on the arguments keyword that are also available to us on an array.
+ES6 allows you to put your variables inside of your string. Template literals are enclosed by the backtick (``) (grave accent) character instead of double or single quotes.
 
-For example, in our console log, let's go ahead and add the .length. Run the function again, and we'll see that 3, the length of our array like arguments, is returned back to us. It's important to note that most methods available to us on arrays are not available to us on the arguments keyword.
+Template literals can contain placeholders. These are indicated by the dollar sign and curly braces (\${expression}). The expressions in the placeholders and the text between the backticks (``) get passed to a function.
+
+The default function just concatenates the parts into a single string. If there is an expression preceding the template literal (tag here), this is called a tagged template. In that case, the tag expression (usually a function) gets called with the template literal, which you can then manipulate before outputting.
+
+I'm going to surround this with a grave. So I'll put one there and I'll put one here.
+
+Then, instead of doing plus and then quote, I'll just surround this guy with the dollar sign, curly brace, and then close curly brace. You'll see if I rerun this, I'll get Carol is walking.
 
 ```javascript
-function logArgs() {
-  console.log(arguments.length); // 3
-}
-
-logArgs(1, 2, 3);
+var activity = `${name} is ${action}`;
 ```
 
-For example, let's do a forEach() on the arguments. In our callback function, we have our value, index, and array parameters. Let's just console log out the value for each loop. If we run this again, we'll see that arguments.forEach() is not a function. That's because while arguments is array like, it does not have all of the methods that the array prototype has on it.
+It actually respects white space even across multiple lines. If I put some lines in here and if I say name, is and action and run this. You'll see I get some blank lines, Carol all the way at the left and then a couple tabs, and then is, and then more blank lines till you get walking.
 
 ```javascript
-function logArgs() {
-  arguments.forEach(function(arg) {
-    console.log(arg); // TypeError: arguments.forEach is not a function
-  });
-}
+var activity = `
 
-logArgs(1, 2, 3);
+${name} 
+
+    is
+    
+    ${action}
+`;
 ```
 
-To show an example of how we worked around this in ES5, and how rest parameters mean that we don't have to anymore, let's create a new constructor. We'll call this constructor supermarket, and in it we'll return an object with some methods.
-
-The first one will be the add method, and what this will do is add new items to something inside of our supermarket. Let's create var isle, and we'll have some categories like fruit and vegetables which have arrays of all the fruits and vegetables in that sectors.
+It's also worth noting that you can do expressions inside of these braces. If you want to do X + Y, then just show Y and just show X, and then run this. You can see we get 1 + 2 = 3, and then this is one.
 
 ```javascript
-function Supermarket() {
-  var sectors = {
-    meat: [],
-    vegetables: []
-  };
-  return {
-    //Supermarket().add('category', 'item1', 'item2');
-    add: function(category) {},
-    sectors: sectors
-  };
-}
+var a = 3;
+var b = 5;
+var equation = `${a} * ${b} = ${a * b}`;
+
+console.log(equation); // "3 * 5 = 15"
 ```
 
-Let's return that back to us as well, so we can access it from outside the constructor, and inside of our add method we'll have a function that takes this specific sectors as the first parameter, and then all the items we're adding to that sectors as the remaining parameters.
+In certain cases, nesting a template is the easiest (and perhaps more readable) way to have configurable strings. Within a backticked template, it is simple to allow inner backticks simply by using them inside a placeholder \${ } within the template.
 
-In the past, with ES5 the way that we turned our array like arguments into an actual array was to use the splice call hack. The way we did this was we called splice on an array, and then we called it with our arguments, starting with the first index. What this does is exclude the category argument, but takes the remaining arguments, and puts them into an array that we've called items. If we console log out items in this function, we can see the array that's created.
+For instance, if condition a is true, then return this templated literal.
 
-```javascript
-return {
-  //Supermarket().add('category', 'item1', 'item2');
-  add: function(category) {
-    var items = [].splice.call(arguments, 1);
-    console.log(items);
-  }
-};
+In ES5:
+
+```js
+let classes = "header";
+classes += isLargeScreen()
+  ? ""
+  : item.isCollapsed
+  ? " icon-expander"
+  : " icon-collapser";
 ```
 
-Let's create a new instance of this constructor, and we'll call it cityMarket. Down below we'll call cityMarket.add(), and we'll be adding to the fruit sectors bananas and apples. If we clear out our console, and run this again, we'll see that bananas and apples are the fruits inside the items array.
+In ES6 with template literals and without nesting:
 
-```javascript
-var cityMarket = new Supermarket();
-
-cityMarket.add("fruit", "bananas", "apples");
+```js
+const classes = `header ${
+  isLargeScreen() ? "" : item.isCollapsed ? "icon-expander" : "icon-collapser"
+}`;
 ```
 
-Now that we have an array, we can call forEach on it, and with our value index, and array arguments, we're going to go ahead and push all of these new fruits to the fruits category.
+In ES6 with nested template literals:
 
-```javascript
-return {
-  //Supermarket().add('category', 'item1', 'item2');
-  add: function(category) {
-    var items = [].splice.call(arguments, 1);
-    console.log(items);
-    items.forEach(function(value, index, array) {
-      sectors[category].push(value);
-    });
-  }
-};
-```
-
-After calling add on our new grocery supermarket, we can access the sectors, and see that the fruit sectors has bananas and apples added to it.
-
-```javascript
-cityMarket.add('fruit', 'bananas', 'apples');
-console.log(cityMarket.sectors;)
-  // [object Object] {
-  //  fruit: ["bananas", "apples"],
-  //  meat: [],
-  //  vegetables: [],
-  //}
-```
-
-Now let's simplify this with the new rest parameters of ES6. The way that we access this is by doing three dots, followed by the variable we want to represent the array of the remaining arguments.
-
-Because this is already an array, we don't have to transform our array like arguments into an actual array, so we can just console out items, run this again, and see that we get an array of bananas and apples immediately. We can also see that our fruit sector has the bananas and apples items inside of the array.
-
-```javascript
-return {
-  //Supermarket().add('category', 'item1', 'item2');
-  add: function(category, ...items) {
-    //   var items = [].splice.call(arguments, 1);
-    console.log(items); // ["bananas", "apples"]
-    items.forEach(function(value, index, array) {
-      sectors[category].push(value);
-    });
-  }
-};
-```
-
-All arguments declared before the rest parameters will be represented by those variables, however, any remaining arguments will be inserted into the new rest array. Because of this, we don't have to remove category from our array, as it is already not included.
+const classes = `header ${ isLargeScreen() ? '' :`icon-\${item.isCollapsed ? 'expander' : 'collapser'}`}`;
