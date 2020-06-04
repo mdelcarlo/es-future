@@ -5,11 +5,11 @@ The rest parameter syntax allows us to represent an indefinite number of argumen
 If we take a look at the arguments keyword in ES5. What the arguments keyword does is return back to us an array like object of all the arguments that we're passing to our function. To see a simple example of this, let's go ahead and create myfunc(), and just console log out the arguments keyword of that function. Down below we'll call myfunc with arguments one, two, three, and run that to see what the console output is.
 
 ```javascript
-function myFunc() {
+function logArgs() {
   console.log(arguments);
 }
 
-myFunc(1, 2, 3);
+logArgs(1, 2, 3);
 //[object Arguments] {
 //  0: 1,
 //  1: 2,
@@ -22,23 +22,23 @@ As you can see, we're returned back an array like object with all of the argumen
 For example, in our console log, let's go ahead and add the .length. Run the function again, and we'll see that 3, the length of our array like arguments, is returned back to us. It's important to note that most methods available to us on arrays are not available to us on the arguments keyword.
 
 ```javascript
-function myFunc() {
+function logArgs() {
   console.log(arguments.length); // 3
 }
 
-myFunc(1, 2, 3);
+logArgs(1, 2, 3);
 ```
 
 For example, let's do a forEach() on the arguments. In our callback function, we have our value, index, and array parameters. Let's just console log out the value for each loop. If we run this again, we'll see that arguments.forEach() is not a function. That's because while arguments is array like, it does not have all of the methods that the array prototype has on it.
 
 ```javascript
-function myFunc() {
-  arguments.forEach(function(v, i, a) {
-    console.log(v); // TypeError: arguments.forEach is not a function
+function logArgs() {
+  arguments.forEach(function(arg) {
+    console.log(arg); // TypeError: arguments.forEach is not a function
   });
 }
 
-myFunc(1, 2, 3);
+logArgs(1, 2, 3);
 ```
 
 To show an example of how we worked around this in ES5, and how rest parameters mean that we don't have to anymore, let's create a new constructor. We'll call this constructor supermarket, and in it we'll return an object with some methods.
