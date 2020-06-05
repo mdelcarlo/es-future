@@ -38,11 +38,11 @@ Essentially you're just going to take the first 6 numbers of mobileNumber, ignor
 
 ## .includes()
 
-Then next up we have .includes() which will just check if that string is anywhere in it. If I wanted to see if my name includes the letters TI, then I could use name.includes('TI'), which is true.
+Then next up we have .includes() which will just check if that string is anywhere in it. If I wanted to see if my name includes the letters Galt, then I could use name.includes('Galt'), which is true.
 
 ```js
-const name = "MATIAS";
-name.includes("TI"); // true
+const name = "John Galt";
+name.includes("Galt"); // true
 ```
 
 Again, it is not case sensitive so you cannot use lower case letters here.
@@ -53,9 +53,12 @@ Again, it is not case sensitive so you cannot use lower case letters here.
 
 Next up we have make, model and colour here:
 
-const make = 'Ferrari';
-const model = 'Enzo';
-const colour = 'Crimson red';
+```js
+const make = "Ferrari";
+const model = "Enzo";
+const colour = "Crimson red";
+```
+
 I'm going to show you where that would be useful for using .repeat(), which allows you to take a string, and repeat it. You can just call .repeat() and it's going to repeat that string over and over and over again.
 
 Where is that useful? Sometimes we have some words here. I'm going to take my Ferrari, Enzo and crimson red, and if I wanted to display the variables in a terminal or something, but I want to right align them. How would that work? I'd have to just put a whole bunch of padding in, depending on how long this was and how much space will be used, kind of like this:
@@ -68,8 +71,9 @@ What we can do, instead of hitting the space bar each time, we can use a left pa
 
 Here we can return a string, and we need to then pad it with however many characters we need. We'll take a space and repeat it 10 times.
 
+```js
 leftPad = function(str, length = 10){
-return `${' '.repeat(length)}${str}`;
+  return `${' '.repeat(length)}${str}`;
 }
 
 console.log(leftPad(make)); // ' Ferrari'
@@ -78,11 +82,16 @@ console.log(leftPad(colour)); // ' Crimson red'
 However, if we want it right aligned, we'll need to subtract however many characters are in the string, so we subtract str.length here before we return the actual string itself in \${str};
 
 leftPad = function(str, length = 20){
-return `${' '.repeat(Math.max(length - str.length,0))}${str}`;
+  return `${' '.repeat(Math.max(length - str.length,0))}${str}`;
 }
+```
+
 I can take make, model, and color, put them in here. It's going to console.log each one of them out. I'm going to leave out the length because we're going to default it to 20, and it should just pass in the make, model, and color.
 
+```js
 console.log(leftPad(make)); // ' Ferrari'
 console.log(leftPad(model)); // ' Enzo'
 console.log(leftPad(colour)); // ' Crimson red'
+```
+
 There we go. See how all these are perfectly right aligned? Ferrari Enzo in crimson red, whereas all of this is however much padding we actually need. That's a nice little use for repeat.
