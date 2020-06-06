@@ -146,3 +146,36 @@ const { name: martianName, iq: martianIq } = martian;
 console.log(martianName); // Marc
 console.log(martianIq); // 180
 ```
+
+#### Nested Destructuring:
+
+Here in our main student object, we have a nested object and there are some scores. when we want to extract these key we need to follow nested Destructuring rules.
+
+```js
+const student = {
+  firstname: "Jhon",
+  lastname: "Snow",
+  ielts_scores: {
+    speaking: 8,
+    listening: 7.5,
+    writing: 8.5,
+    reading: 7.0
+  }
+};
+
+const {
+  firstname,
+  lastname,
+  country,
+  ielts_scores: { speaking, listening, writing, reading }
+} = student;
+
+console.log(`${firstname} ${lastname}`); //"Jhon Snow"
+console.log(`
+    speaking:${speaking},
+    listening:${listening},
+    writing:${writing},
+    reading:${reading}
+`);
+//"speaking:8, listening:7.5, writing:8.5, reading:7"
+```
