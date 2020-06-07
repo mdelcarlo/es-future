@@ -28,7 +28,7 @@ Second, if there's only one parameter, like you only take in one num, you can ac
 var arrowSum = num => num;
 
 
-var squared = x => x \* x;
+var squared = x => x * x;
 ```
 
 An extremely common scenario that you've probably run into before whether though click handlers or anything else is that, you write a function to handle some sort of action and you write the body of the function, and you run into the scenario where you'll assign that = this because you actually want to get the age off of the parent scope.
