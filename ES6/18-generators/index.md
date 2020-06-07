@@ -101,3 +101,34 @@ It will safely pause instead of infinitely going through this while loop. When I
 ```
 
 I could generate these forever. They're also only created when I request them through the yield. They're not created ahead of time.
+
+## simpler asynchronous code
+
+You can use generators to tremendously simplify working with Promises. Let’s look at a Promise-based function fetchJson() and how it can be improved via generators.
+
+```js
+function fetchJson(url) {
+  return fetch(url)
+    .then(request => request.text())
+    .then(text => {
+      return JSON.parse(text);
+    })
+    .catch(error => {
+      console.log(`ERROR: ${error.stack}`);
+    });
+}
+```
+
+With the library co and a generator, this asynchronous code looks synchronous:
+
+```js
+const fetchJson = co.wrap(function*(url) {
+  try {
+    let request = yield fetch(url);
+    let text = yield request.text();
+    return JSON.parse(text);
+  } catch (error) {
+    console.log(`ERROR: ${error.stack}`);
+  }
+});
+```
