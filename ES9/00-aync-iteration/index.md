@@ -44,6 +44,7 @@ async function* streamAsyncIterable(stream) {
     reader.releaseLock();
   }
 }
+
 // Fetches data from url and calculates response size using the async generator.
 async function getResponseSize(url) {
   const response = await fetch(url);
