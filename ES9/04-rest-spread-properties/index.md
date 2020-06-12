@@ -1,21 +1,41 @@
-# Rest/Spread properties:
+## Rest/Spread Properties
 
-The last arguments sent to a function are changed to an array using Rest parameters and the (...) notation can be used only for array operations.
+ES6 introduced the concept of a rest element when working with array destructuring:
 
 ```js
-restParams(1, 2, 3, 4, 5);
-
-function restParams(p1, p2, ...p3) {
-  // p1 = 1
-  // p2 = 2
-  // p3 = [3, 4, 5]
-}
+const numbers = [1, 2, 3, 4, 5]
+[first, second, ...others] = numbers
 ```
 
-In an opposite manner, an array is turned into separate arguments using the spread operator. These arguments can be transferred to a function.
+and spread elements:
 
 ```js
-const numbers = [9, 90, 10, 103, -2];
+const numbers = [1, 2, 3, 4, 5];
+const sum = (a, b, c, d, e) => a + b + c + d + e;
+const sumOfNumbers = sum(...numbers);
+```
 
-console.log(Math.max(...numbers)); // 103
+ES2018 introduces the same but for objects.
+
+Rest properties:
+
+```js
+const { first, second, ...others } = {
+  first: 1,
+  second: 2,
+  third: 3,
+  fourth: 4,
+  fifth: 5
+};
+
+first; // 1
+second; // 2
+others; // { third: 3, fourth: 4, fifth: 5 }
+```
+
+Spread properties allow to create a new object by combining the properties of the object passed after the spread operator:
+
+```js
+const items = { first, second, ...others };
+items; //{ first: 1, second: 2, third: 3, fourth: 4, fifth: 5 }
 ```
