@@ -66,7 +66,7 @@ Or, if say.js has the default export:
 
 // 📁 say.js
 export default function() {
-alert("Module loaded (export default)!");
+    alert("Module loaded (export default)!");
 }
 ```
 
