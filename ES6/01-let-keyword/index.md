@@ -2,48 +2,48 @@
 
 Let is a variable block-scoped binding construct. `let` is the new `var`.
 
-A long-standing gotcha with JavaScript is how var works. If I have this age assigned to 5, and I have this age assigned to 18, you'd probably think, "This one's inside of a block so it should have no impact on what this age does up here." But if I run this, you'll actually see that that isn't the case. 18 is being logged out because this is the same age, and it's being reassigned to 18.
+A long-standing gotcha with JavaScript is how var works. If I have this bookName assigned to 5, and I have this bookName assigned to The fountainhed'', you'd probably think, "This one's inside of a block so it should have no impact on what this bookName does up here." But if I run this, you'll actually see that that isn't the case. The fountainhed'' is being logged out because this is the same bookName, and it's being reassigned to The fountainhed''.
 
 ```javascript
-var age = 15;
+var bookName = "Anthem";
 {
-  var age = 18;
+  var bookName = "The fountainhed";
 }
 
-console.log(age); // 18
+console.log(bookName); // 'The fountainhed'
 ```
 
-ES5 does have function scoping, so if I were to create a function and lock it inside of there, then it wouldn't have any impact, and I would get 15. But if I were to create a for loop, or some other thing that could use a block, then that wouldn't work, and I get the same result as logging out, 18, each time.
+ES5 does have function scoping, so if I were to create a function and lock it inside of there, then it wouldn't have any impact, and I would get 'Anthem'. But if I were to create a for loop, or some other thing that could use a block, then that wouldn't work, and I get the same result as logging out, The fountainhed'', each time.
 
 ```javascript
-var age = 15;
+var bookName = "Anthem";
 
 function greet() {
-  var age = 18;
+  var bookName = "The fountainhed";
 }
 
-console.log(age); // 15
+console.log(bookName); // 'Anthem'
 ```
 
 To help with this problem, we do have let in ES6, which will allow me to use block scoping.
 
 ```javascript
-let age = 15;
+let bookName = "Anthem";
 {
-  let age = 18;
+  let bookName = "The fountainhed";
 }
 
-console.log(age); // 15
+console.log(bookName); // 'Anthem'
 ```
 
-If I rerun this, you'll see that we still get 15, even though we have age here, and age here. This age, because it's inside of a block, even though it's not inside of a function, has no impact on the assignment of this age. They are two separate and different entities.
+If I rerun this, you'll see that we still get 'Anthem', even though we have bookName here, and bookName here. This bookName, because it's inside of a block, even though it's not inside of a function, has no impact on the assignment of this bookName. They are two separate and different entities.
 
 Let's explore this behavior in a bit more detail by creating an array of functions, and a loop where we say var num is assigned to 0, num < 10, and num is incremented, so num++.
 
 ```javascript
-var newArray = [];
+var numbersArray = [];
 for (var num = 0; num < 10; num++) {
-  newArray.push(function() {
+  numbersArray.push(function() {
     console.log(num);
   });
 }
@@ -52,7 +52,7 @@ for (var num = 0; num < 10; num++) {
 Then we will add a new function to our array each time we go through, which will store num, and log it out for us. If we loop through the array of functions using a forEach, which will pass in fun, and then invoke fun().
 
 ```javascript
-newArray.forEach(function(fun) {
+numbersArray.forEach(function(fun) {
   fun(); // 10 10 10 10 10 10 10 10 10 10
 });
 ```
@@ -62,9 +62,9 @@ This function which is being passed in through our forEach is simply this functi
 If I use let instead of var now, and rerun this, you'll see that I get zero through 9, and it stops before getting to 10, because this is creating a new num each time you go through the for loop.
 
 ```javascript
-var newArray = [];
+var numbersArray = [];
 for (let num = 0; num < 10; num++) {
-  newArray.push(function() {
+  numbersArray.push(function() {
     console.log(num); // 0 1 2 3 4 5 6 7 8 9
   });
 }
