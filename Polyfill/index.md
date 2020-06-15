@@ -1,6 +1,6 @@
 # Installation
 
-Since many people don’t think to update their browsers to make their developer’s lives easier, we’ll need to use babel to get started using features that are not available across the board for users. For simplicity’s sake, I’ll use the Parcel bundler to get everything running as quickly as possible. And yarn as package manager.
+Since many people don’t think to update their browsers to make their developer’s lives easier, we’ll need to use babel to get started using features that are not available across the board for users. For simplicity’s sake, I’ll use the Parcel bundler to get everything running as quickly as possible.
 
 ```js
 $ yarn add parcel-bundler
