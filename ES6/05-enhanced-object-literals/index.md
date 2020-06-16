@@ -1,6 +1,6 @@
 # Enhanced Object literals
 
-Object literals make it easy to quickly create objects with properties inside the curly braces. To create an object, we simply notate a list of key: value pairs delimited by comma.
+Object literals title it easy to quickly create objects with properties inside the curly braces. To create an object, we simply notate a list of key: value pairs delimited by comma.
 
 In ES6, object literals are extended to support setting the prototype at construction, shorthand for foo: foo assignments, defining methods, making super calls, and computing property names with expressions.
 
@@ -12,33 +12,33 @@ Three ways that ES6 makes object literal declaration easier:
 
 ### Shorthand for Initializing Properties
 
-We will use an example to explain this. Let's create a getLaptop function. We are using a function here to make it easier for to pass variables. We are basically still creating an object. Prior to ES6, if we want to initialize a property in an object using object literals, we will do the following:
+We will use an example to explain this. Let's create a getBook function. We are using a function here to title it easier for to pass variables. We are basically still creating an object. Prior to ES6, if we want to initialize a property in an object using object literals, we will do the following:
 
     ```js
     //ES5
-    function getLaptop(make, model, year) {
+    function getBook(title, author, year) {
         return {
-            make: make,
-            model: model,
+            title: title,
+            author: author,
             year: year
         }
     }
 
-    getLaptop("Apple", "MacBook", "2015");// {make: "Apple", model: "MacBook", year: "2015"}
+    getBook("Death on the Nile", "Agatha Christie", "1937");// {title: "Death on the Nile", author: "Agatha Christie", year: "1937"}
     ```
 
-So in the above function, the object that is being returned is created using object literals. The properties of this object are created by assigning the value of the parameters passed to their corresponding keys. Did you notice the repetition there? I did too. ES6 removes all of that repetition. Here's how we will write our getLaptop function;
+So in the above function, the object that is being returned is created using object literals. The properties of this object are created by assigning the value of the parameters passed to their corresponding keys. Did you notice the repetition there? I did too. ES6 removes all of that repetition. Here's how we will write our getBook function;
 
     ```js
-    function getLaptop(make, model, year) {
+    function getBook(title, author, year) {
         return {
-            make,
-            model,
+            title,
+            author,
             year
         }
     }
 
-    getLaptop("Apple", "MacBook", "2015"); // {make: "Apple", model: "MacBook", year: "2015"}
+    getBook("Death on the Nile", "Agatha Christie", "1937"); // {title: "Death on the Nile", author: "Agatha Christie", year: "1937"}
     ```
 
 Much more easier to write and read. What happens here is that it checks if the property key has a corresponding variable name and assigns the value of that variable to the property. Note that if no variable has the same name as the property key defined, we'll get an error.
@@ -49,30 +49,30 @@ Prior to ES6, the syntax for writing methods in objects is this:
 
 ```js
 //ES5
-function getLaptop(make, model, year) {
+function getBook(title, author, year) {
   return {
-    sayModel: function() {
-      return model;
+    sayAuthor: function() {
+      return author;
     }
   };
 }
 
-getLaptop("Apple", "MacBook", "2015").sayModel(); //"MacBook"
+getBook("Death on the Nile", "Agatha Christie", "1937").sayAuthor(); //"Agatha Christie"
 ```
 
 With ES6, we don't have to write much code just to get a method to work.
 
 ```js
 //ES5
-function getLaptop(make, model, year) {
+function getBook(title, author, year) {
   return {
-    sayModel() {
-      return model;
+    sayAuthor() {
+      return author;
     }
   };
 }
 
-getLaptop("Apple", "MacBook", "2015").sayModel(); //"MacBook"
+getBook("Death on the Nile", "Agatha Christie", "1937").sayAuthor(); //"Agatha Christie"
 ```
 
 Did you notice the difference? The : and function are no longer necessary to define a method. So ES6 makes the syntax for creating methods concise.
@@ -84,30 +84,30 @@ Computed property names allow us to write an expression wrapped in square bracke
 Whatever the expression evaluates to will become the property name. This means that we can do this:
 
 ```js
-var name = "make";
-const laptop = {
-  [name]: "Apple"
+var name = "title";
+const book = {
+  [name]: "Death on the Nile"
 };
 
-console.log(laptop.make); //"Apple"
+console.log(book.title); //"Death on the Nile"
 ```
 
-The value of name was computed to make and this was used as the name of the property. This is why we can access the property using laptop.make;
+The value of name was computed to title and this was used as the name of the property. This is why we can access the property using book.title;
 
 Similarly, this will work.
 
 ```js
-var name = "make";
+var name = "title";
 var i = 0;
-const laptop = {
-  [name + ++i]: "Apple",
-  [name + ++i]: "Dell",
-  [name + ++i]: "HP"
+const book = {
+  [name + ++i]: "Death on the Nile",
+  [name + ++i]: "Curtain",
+  [name + ++i]: "The Big Four"
 };
 
-console.log(laptop.make1); //"Apple"
-console.log(laptop.make2); //"Dell"
-console.log(laptop.make3); //"HP"
+console.log(book.title1); //"Death on the Nile"
+console.log(book.title2); //"Curtain"
+console.log(book.title3); //"The Big Four"
 ```
 
 In this case, the value of both name and i are computed and concatenated to get the name of the property.
