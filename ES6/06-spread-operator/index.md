@@ -63,9 +63,9 @@ myFunction(...args);
 Without spread syntax, to create a new array using an existing array as one part of it, the array literal syntax is no longer sufficient and imperative code must be used instead using a combination of push(), splice(), concat(), etc. With spread syntax this becomes much more succinct:
 
 ```js
-const parts = ["shoulders", "knees"];
-const lyrics = ["head", ...parts, "and", "toes"];
-//  ["head", "shoulders", "knees", "and", "toes"]
+const moreParts = ["prologue", "foreword"];
+const bookParts = ["title page", ...moreParts, "dedication", "epilogue"];
+//  ["title page", "prologue", "foreword", "dedication", "epilogue"]
 ```
 
 Just like spread for argument lists, ... can be used anywhere in the array literal, and may be used more than once.
@@ -73,12 +73,12 @@ Just like spread for argument lists, ... can be used anywhere in the array liter
 #### Copy an array
 
 ```js
-const arr = ["cat", "dog", "parrot"];
-const arr2 = [...arr]; // like arr.slice()
+const moreParts = ["prologue", "foreword"];
+const newParts = [...moreParts]; // like arr.slice()
 
-arr2.push("mouse");
-//  arr2 becomes ['cat', 'dog', 'parrot', 'mouse']
-//  arr remains unaffected
+newParts.push("introduction");
+//  newParts becomes ['prologue', 'foreword', 'introduction']
+//  moreParts remains unaffected
 ```
 
 #### A better way to concatenate arrays
