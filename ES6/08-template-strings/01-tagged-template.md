@@ -9,10 +9,10 @@ The tag function can then perform whatever operations on these arguments you wis
 The name of the function used for the tag can be whatever you want.
 
 ```js
-let vehicle = "Bicycle";
-let wheels = 2;
+let book = "Meditations";
+let pages = 93;
 
-function myVehicleTag(strings, vehicleExp, wheelsExp) {
+function myVehicleTag(strings, bookExp, pagesExp) {
   let str0 = strings[0]; // "That "
   let str1 = strings[1]; // " is a "
 
@@ -21,25 +21,23 @@ function myVehicleTag(strings, vehicleExp, wheelsExp) {
   // but it is empty (""), so disregard.
   // let str2 = strings[2];
 
-  let wheelsStr;
-  if (wheelsExp === 2) {
-    wheelsStr = "Bike";
-  } else (wheelsExp === 3) {
-    wheelsStr = "Tricycle";
-  } else (wheelsExp === 4) {
-    wheelsStr = "Quad";
+  let pagesStr;
+  if (pagesExp < 100) {
+    pagesStr = "small book";
+  } else (pagesExp < 300) {
+    pagesStr = "medium book";
   } else {
-    wheelsStr = "Madness";
+    pagesStr = "big book";
   }
 
   // We can even return a string built using a template literal
-  return `${str0}${vehicleExp}${str1}${wheelsStr}`;
+  return `${str0}${bookExp}${str1}${pagesStr}`;
 }
 
-let output = myVehicleTag`That ${vehicle} is a ${wheels}`;
+let output = myVehicleTag`That ${book} is a ${pages}`;
 
 console.log(output);
-// That Bicycle is a Bike
+// That Meditations is a small book
 ```
 
 Tag functions don't even need to return a string!
@@ -59,6 +57,6 @@ function replaceValues(strings, ...keys) {
 
 let firstReplacement = replaceValues`${1}${4}${0}${3}${2}!!`;
 firstReplacement("L", "H", "O", "L", "E"); // "HELLO!!"
-let secondReplacement = replaceValues`${0} has a new ${"car"}`;
-secondReplacement("John", { car: "Ferrari" }); // John has a new Ferrari
+let secondReplacement = replaceValues`${0} bought ${"book"}`;
+secondReplacement("John", { book: "Sapiens" }); // John bought Sapiens
 ```

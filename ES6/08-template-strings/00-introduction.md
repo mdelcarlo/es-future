@@ -41,31 +41,31 @@ function logArgs() {
 logArgs(1, 2, 3);
 ```
 
-To show an example of how we worked around this in ES5, and how rest parameters mean that we don't have to anymore, let's create a new constructor. We'll call this constructor supermarket, and in it we'll return an object with some methods.
+To show an example of how we worked around this in ES5, and how rest parameters mean that we don't have to anymore, let's create a new constructor. We'll call this constructor library, and in it we'll return an object with some methods.
 
-The first one will be the add method, and what this will do is add new items to something inside of our supermarket. Let's create var isle, and we'll have some categories like fruit and vegetables which have arrays of all the fruits and vegetables in that sectors.
+The first one will be the add method, and what this will do is add new items to something inside of our library. Let's create var isle, and we'll have some categories like fiction and sport which have arrays of all the fictions and sport in that categories.
 
 ```javascript
-function Supermarket() {
-  var sectors = {
-    meat: [],
-    vegetables: []
+function Library() {
+  var categories = {
+    history: [],
+    sport: []
   };
   return {
-    //Supermarket().add('category', 'item1', 'item2');
+    //Library().add('category', 'item1', 'item2');
     add: function(category) {},
-    sectors: sectors
+    categories: categories
   };
 }
 ```
 
-Let's return that back to us as well, so we can access it from outside the constructor, and inside of our add method we'll have a function that takes this specific sectors as the first parameter, and then all the items we're adding to that sectors as the remaining parameters.
+Let's return that back to us as well, so we can access it from outside the constructor, and inside of our add method we'll have a function that takes this specific categories as the first parameter, and then all the items we're adding to that categories as the remaining parameters.
 
 In the past, with ES5 the way that we turned our array like arguments into an actual array was to use the splice call hack. The way we did this was we called splice on an array, and then we called it with our arguments, starting with the first index. What this does is exclude the category argument, but takes the remaining arguments, and puts them into an array that we've called items. If we console log out items in this function, we can see the array that's created.
 
 ```javascript
 return {
-  //Supermarket().add('category', 'item1', 'item2');
+  //Library().add('category', 'item1', 'item2');
   add: function(category) {
     var items = [].splice.call(arguments, 1);
     console.log(items);
@@ -73,53 +73,53 @@ return {
 };
 ```
 
-Let's create a new instance of this constructor, and we'll call it cityMarket. Down below we'll call cityMarket.add(), and we'll be adding to the fruit sectors bananas and apples. If we clear out our console, and run this again, we'll see that bananas and apples are the fruits inside the items array.
+Let's create a new instance of this constructor, and we'll call it cityMarket. Down below we'll call cityMarket.add(), and we'll be adding to the fiction categories Animal Farm and To Kill A Mockingbird. If we clear out our console, and run this again, we'll see that Animal Farm and To Kill A Mockingbird are the fictions inside the items array.
 
 ```javascript
-var cityMarket = new Supermarket();
+var cityMarket = new Library();
 
-cityMarket.add("fruit", "bananas", "apples");
+cityMarket.add("fiction", "Animal Farm", "To Kill A Mockingbird");
 ```
 
-Now that we have an array, we can call forEach on it, and with our value index, and array arguments, we're going to go ahead and push all of these new fruits to the fruits category.
+Now that we have an array, we can call forEach on it, and with our value index, and array arguments, we're going to go ahead and push all of these new fictions to the fictions category.
 
 ```javascript
 return {
-  //Supermarket().add('category', 'item1', 'item2');
+  //Library().add('category', 'item1', 'item2');
   add: function(category) {
     var items = [].splice.call(arguments, 1);
     console.log(items);
     items.forEach(function(value, index, array) {
-      sectors[category].push(value);
+      categories[category].push(value);
     });
   }
 };
 ```
 
-After calling add on our new grocery supermarket, we can access the sectors, and see that the fruit sectors has bananas and apples added to it.
+After calling add on our new grocery library, we can access the categories, and see that the fiction categories has Animal Farm and To Kill A Mockingbird added to it.
 
 ```javascript
-cityMarket.add('fruit', 'bananas', 'apples');
-console.log(cityMarket.sectors;)
+cityMarket.add('fiction', 'Animal Farm', 'To Kill A Mockingbird');
+console.log(cityMarket.categories;)
   // [object Object] {
-  //  fruit: ["bananas", "apples"],
-  //  meat: [],
-  //  vegetables: [],
+  //  fiction: ["Animal Farm", "To Kill A Mockingbird"],
+  //  history: [],
+  //  sport: [],
   //}
 ```
 
 Now let's simplify this with the new rest parameters of ES6. The way that we access this is by doing three dots, followed by the variable we want to represent the array of the remaining arguments.
 
-Because this is already an array, we don't have to transform our array like arguments into an actual array, so we can just console out items, run this again, and see that we get an array of bananas and apples immediately. We can also see that our fruit sector has the bananas and apples items inside of the array.
+Because this is already an array, we don't have to transform our array like arguments into an actual array, so we can just console out items, run this again, and see that we get an array of Animal Farm and To Kill A Mockingbird immediately. We can also see that our fiction sector has the Animal Farm and To Kill A Mockingbird items inside of the array.
 
 ```javascript
 return {
-  //Supermarket().add('category', 'item1', 'item2');
+  //Library().add('category', 'item1', 'item2');
   add: function(category, ...items) {
     //   var items = [].splice.call(arguments, 1);
-    console.log(items); // ["bananas", "apples"]
+    console.log(items); // ["Animal Farm", "To Kill A Mockingbird"]
     items.forEach(function(value, index, array) {
-      sectors[category].push(value);
+      categories[category].push(value);
     });
   }
 };
