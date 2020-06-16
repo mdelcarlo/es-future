@@ -2,41 +2,41 @@
 
 Let is a variable block-scoped binding construct. `let` is the new `var`.
 
-A long-standing gotcha with JavaScript is how var works. If I have this bookName assigned to 5, and I have this bookName assigned to The fountainhed'', you'd probably think, "This one's inside of a block so it should have no impact on what this bookName does up here." But if I run this, you'll actually see that that isn't the case. The fountainhed'' is being logged out because this is the same bookName, and it's being reassigned to The fountainhed''.
+A long-standing gotcha with JavaScript is how var works. If I have this bookTitle assigned to 5, and I have this bookTitle assigned to The fountainhed'', you'd probably think, "This one's inside of a block so it should have no impact on what this bookTitle does up here." But if I run this, you'll actually see that that isn't the case. The fountainhed'' is being logged out because this is the same bookTitle, and it's being reassigned to The fountainhed''.
 
 ```javascript
-var bookName = "Anthem";
+var bookTitle = "Anthem";
 {
-  var bookName = "The fountainhed";
+  var bookTitle = "The fountainhed";
 }
 
-console.log(bookName); // 'The fountainhed'
+console.log(bookTitle); // 'The fountainhed'
 ```
 
 ES5 does have function scoping, so if I were to create a function and lock it inside of there, then it wouldn't have any impact, and I would get 'Anthem'. But if I were to create a for loop, or some other thing that could use a block, then that wouldn't work, and I get the same result as logging out, The fountainhed'', each time.
 
 ```javascript
-var bookName = "Anthem";
+var bookTitle = "Anthem";
 
 function greet() {
-  var bookName = "The fountainhed";
+  var bookTitle = "The fountainhed";
 }
 
-console.log(bookName); // 'Anthem'
+console.log(bookTitle); // 'Anthem'
 ```
 
 To help with this problem, we do have let in ES6, which will allow me to use block scoping.
 
 ```javascript
-let bookName = "Anthem";
+let bookTitle = "Anthem";
 {
-  let bookName = "The fountainhed";
+  let bookTitle = "The fountainhed";
 }
 
-console.log(bookName); // 'Anthem'
+console.log(bookTitle); // 'Anthem'
 ```
 
-If I rerun this, you'll see that we still get 'Anthem', even though we have bookName here, and bookName here. This bookName, because it's inside of a block, even though it's not inside of a function, has no impact on the assignment of this bookName. They are two separate and different entities.
+If I rerun this, you'll see that we still get 'Anthem', even though we have bookTitle here, and bookTitle here. This bookTitle, because it's inside of a block, even though it's not inside of a function, has no impact on the assignment of this bookTitle. They are two separate and different entities.
 
 Let's explore this behavior in a bit more detail by creating an array of functions, and a loop where we say var num is assigned to 0, num < 10, and num is incremented, so num++.
 

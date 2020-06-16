@@ -2,11 +2,11 @@
 
 In ES6 we can set default parameters of our functions.
 
-Default arguments in ES6 allow you of assign some defaults of these guys. If I run this right now you'll see I'll get undefined, undefined because nothing was passed in for name or author, so when they get logged out they're both undefined.
+Default arguments in ES6 allow you of assign some defaults of these guys. If I run this right now you'll see I'll get undefined, undefined because nothing was passed in for title or author, so when they get logged out they're both undefined.
 
 ```javascript
-function getBookInfo(name, author) {
-  console.log(name + " of " + author);
+function getBookInfo(title, author) {
+  console.log(title + " of " + author);
 }
 
 getBookInfo();
@@ -14,11 +14,11 @@ getBookInfo();
 
 If I want his author of at least default of George Orwell, if I don't pass anything in, I can get undefined of George Orwell. I didn't pass anything in here, but I said the author should at least be George Orwell so it logs out the author as George Orwell.
 
-If I pass in 1984 here, and then run this, you can see I get 1984 of George Orwell. 1984 comes through the name, logged out here as 1984 and the author still defaults of George Orwell, and then is logged out here.
+If I pass in 1984 here, and then run this, you can see I get 1984 of George Orwell. 1984 comes through the title, logged out here as 1984 and the author still defaults of George Orwell, and then is logged out here.
 
 ```javascript
-function getBookInfo(name, author = "George Orwell") {
-  console.log(name + " of " + author);
+function getBookInfo(title, author = "George Orwell") {
+  console.log(title + " of " + author);
 }
 
 getBookInfo("1984"); // 1984 of George Orwell
@@ -27,8 +27,8 @@ getBookInfo("1984"); // 1984 of George Orwell
 If I say Hello, Dostoyevsky, the default will be overridden and I'll get Dostoyevsky instead of George Orwell, because the default was George Orwell, but I said explicitly of say Dostoyevsky.
 
 ```javascript
-function getBookInfo(name, author = "George Orwell") {
-  console.log(name + " of " + author);
+function getBookInfo(title, author = "George Orwell") {
+  console.log(title + " of " + author);
 }
 
 getBookInfo("Crime and Punishment", "Dostoyevsky"); // Crime and Punishment of Dostoyevsky
