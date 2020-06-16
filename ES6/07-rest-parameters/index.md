@@ -57,18 +57,18 @@ let classes = "header";
 classes += isLargeScreen()
   ? ""
   : item.isCollapsed
-  ? " icon-expander"
-  : " icon-collapser";
+  ? " icon-expanded"
+  : " icon-collapsed";
 ```
 
 In ES6 with template literals and without nesting:
 
 ```js
 const classes = `header ${
-  isLargeScreen() ? "" : item.isCollapsed ? "icon-expander" : "icon-collapser"
+  isLargeScreen() ? "" : item.isCollapsed ? "icon-expanded" : "icon-collapsed"
 }`;
 ```
 
 In ES6 with nested template literals:
 
-const classes = `header ${ isLargeScreen() ? '' :`icon-\${item.isCollapsed ? 'expander' : 'collapser'}`}`;
+const classes = `header ${ isLargeScreen() ? '' :`icon-\${item.isCollapsed ? 'expanded' : 'collapsed'}`}`;
