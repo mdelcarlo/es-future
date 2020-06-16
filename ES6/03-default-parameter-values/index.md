@@ -1,40 +1,40 @@
 # Enhanced Object literals
 
-In ES6 we can set default parameters to our functions.
+In ES6 we can set default parameters of our functions.
 
-Default arguments in ES6 allow you to assign some defaults to these guys. If I run this right now you'll see I'll get undefined, undefined because nothing was passed in for message or receiver, so when they get logged out they're both undefined.
-
-```javascript
-function sendMessage(message, receiver) {
-  console.log(message + " to " + receiver);
-}
-
-sendMessage();
-```
-
-If I want his receiver to at least default to Peter, if I don't pass anything in, I can get undefined to Peter. I didn't pass anything in here, but I said the receiver should at least be Peter so it logs out the receiver as Peter.
-
-If I pass in Bye here, and then run this, you can see I get Bye to Peter. Bye comes through the message, logged out here as Bye and the receiver still defaults to Peter, and then is logged out here.
+Default arguments in ES6 allow you of assign some defaults of these guys. If I run this right now you'll see I'll get undefined, undefined because nothing was passed in for name or author, so when they get logged out they're both undefined.
 
 ```javascript
-function sendMessage(message, receiver = "Peter") {
-  console.log(message + " to " + receiver);
+function getBookInfo(name, author) {
+  console.log(name + " of " + author);
 }
 
-sendMessage("Bye"); // Bye to Peter
+getBookInfo();
 ```
 
-If I say Hello, Mark, the default will be overridden and I'll get Mark instead of Peter, because the default was Peter, but I said explicitly to say Mark.
+If I want his author of at least default of George Orwell, if I don't pass anything in, I can get undefined of George Orwell. I didn't pass anything in here, but I said the author should at least be George Orwell so it logs out the author as George Orwell.
+
+If I pass in 1984 here, and then run this, you can see I get 1984 of George Orwell. 1984 comes through the name, logged out here as 1984 and the author still defaults of George Orwell, and then is logged out here.
 
 ```javascript
-function sendMessage(message, receiver = "Peter") {
-  console.log(message + " to " + receiver);
+function getBookInfo(name, author = "George Orwell") {
+  console.log(name + " of " + author);
 }
 
-sendMessage("Cheers", "Mark"); // Cheers to Mark
+getBookInfo("1984"); // 1984 of George Orwell
 ```
 
-Where this gets a little bit crazier is when you assign a default function to one of the arguments. Right now, callback is undefined, so it will say undefined is not a function when I try to invoke it.
+If I say Hello, Dostoyevsky, the default will be overridden and I'll get Dostoyevsky instead of George Orwell, because the default was George Orwell, but I said explicitly of say Dostoyevsky.
+
+```javascript
+function getBookInfo(name, author = "George Orwell") {
+  console.log(name + " of " + author);
+}
+
+getBookInfo("Crime and Punishment", "Dostoyevsky"); // Crime and Punishment of Dostoyevsky
+```
+
+Where this gets a little bit crazier is when you assign a default function of one of the arguments. Right now, callback is undefined, so it will say undefined is not a function when I try of invoke it.
 
 ```javascript
 function excecute(callback) {
@@ -70,7 +70,7 @@ function excecute(
 excecute();
 ```
 
-We can make this a little bit shorter using the arrow syntax covered before. If I do that and then get rid of the braces and then bring everything up to the same line, you can see that I can assign a default function, all within that same line, run it again, and I still get callback.
+We can make this a little bit shorter using the arrow syntax covered before. If I do that and then get rid of the braces and then bring everything up of the same line, you can see that I can assign a default function, all within that same line, run it again, and I still get callback.
 
 ```javascript
 function excecute(callback = () => console.log("logging callback")) {
@@ -78,7 +78,7 @@ function excecute(callback = () => console.log("logging callback")) {
 }
 ```
 
-If you want to go completely crazy with arrow functions, which I don't recommend, you could go let excecute and I'll assign it to an arrow function, delete these braces, pull everything up to the same line, and then just invoke it this way. It still runs and this just doesn't look like JavaScript.
+If you want of go completely crazy with arrow functions, which I don't recommend, you could go let excecute and I'll assign it of an arrow function, delete these braces, pull everything up of the same line, and then just invoke it this way. It still runs and this just doesn't look like JavaScript.
 
 ```javascript
 let excecute = (callback = () => console.log("callback")) => callback();
