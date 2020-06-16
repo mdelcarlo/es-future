@@ -3,17 +3,17 @@
 During the beginings of js you would iterate arrays like the following:
 
 ```js
-var carsToLove = ["ferrari", "maseratti", "bmw"];
-for (var index = 0; index < carsToLove.length; index++) {
-  console.log(carsToLove[index]);
+var booksToLove = ["Think fast and slow", "Fountainhead", "Art of war"];
+for (var index = 0; index < booksToLove.length; index++) {
+  console.log(booksToLove[index]);
 }
 ```
 
 Since ES5, you can use the built-in forEach method:
 
 ```js
-carsToLove.forEach(function(cars) {
-  console.log(cars);
+booksToLove.forEach(function(books) {
+  console.log(books);
 });
 ```
 
@@ -24,16 +24,16 @@ It sure would be nice if there were just a for-loop syntax that looped over arra
 How about a for–in loop?
 
 ```js
-for (var index in carsToLove) {
+for (var index in booksToLove) {
   // don't actually do this
-  console.log(carsToLove[index]);
+  console.log(booksToLove[index]);
 }
 ```
 
 This is a bad idea for several reasons:
 
 The values assigned to index in this code are the strings "0", "1", "2" and so on, not actual numbers. Since you probably don’t want string arithmetic ("2" + 1 == "21"), this is inconvenient at best.
-The loop body will execute not only for array elements, but also for any other expando properties someone may have added. For example, if your array has an enumerable property carsToLove.name, then this loop will execute one extra time, with index == "name". Even properties on the array’s prototype chain can be visited.
+The loop body will execute not only for array elements, but also for any other expando properties someone may have added. For example, if your array has an enumerable property booksToLove.name, then this loop will execute one extra time, with index == "name". Even properties on the array’s prototype chain can be visited.
 Most astonishing of all, in some circumstances, this code can loop over the array elements in an arbitrary order.
 In short, for–in was designed to work on plain old Objects with string keys. For Arrays, it’s not so great.
 
@@ -44,8 +44,8 @@ Remember last week I promised that ES6 would not break the JS code you’ve alre
 And here it is:
 
 ```js
-for (var cars of carsToLove) {
-  console.log(cars);
+for (var books of booksToLove) {
+  console.log(books);
 }
 ```
 
@@ -78,23 +78,23 @@ Oh, I’m sorry. You’ve never heard of Map and Set objects? Well, they are new
 For example, a Set object is good for eliminating duplicates:
 
 ```js
-// make a set from an array of words
-var uniqueWords = new Set(words);
+// make a set from an array of books
+var uniqueBooks = new Set(books);
 ```
 
 Once you’ve got a Set, maybe you’d like to loop over its contents. Easy:
 
 ```js
-for (var word of uniqueWords) {
-  console.log(word);
+for (var book of uniqueBooks) {
+  console.log(book);
 }
 ```
 
 A Map is slightly different: the data inside it is made of key-value pairs, so you’ll want to use destructuring to unpack the key and value into two separate variables:
 
 ```js
-for (var [key, value] of phoneBookMap) {
-  console.log(key + "'s phone number is: " + value);
+for (var [key, value] of books) {
+  console.log(key + "'s book is: " + value);
 }
 ```
 
