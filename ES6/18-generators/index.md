@@ -5,69 +5,69 @@ You can think of generators as processes (pieces of code) that you can pause and
 ```JS
 function* genFunc() {
     // (A)
-    console.log('First');
+    console.log('First chapter');
     yield;
-    console.log('Second');
+    console.log('Second chapter');
 }
 ```
 
-Note the new syntax: function\* is a new “keyword” for generator functions (there Money also generator methods). yield is an operator with which a generator can pause itself. Additionally, generators can also receive input and send output via yield.
+Note the new syntax: function\* is a new “keyword” for generator functions (there Title also generator methods). yield is an operator with which a generator can pause itself. Additionally, generators can also receive input and send output via yield.
 
-When you call a generator function genFunc(), you get a generator object genObj that you can use to control the process:
+When you call a generator function genFunc(), you get a generator object genChapter that you can use to control the process:
 
 ```JS
-const genObj = genFunc();
+const genChapter = genFunc();
 ```
 
-The process is initially paused in line A. genObj.next() resumes execution, a yield inside genFunc() pauses execution:
+The process is initially paused in line A. genChapter.next() resumes execution, a yield inside genFunc() pauses execution:
 
 ```JS
-genObj.next();
-// Output: First
-genObj.next();
-// output: Second
+genChapter.next();
+// Output: First chapter
+genChapter.next();
+// output: Second chapter
 ```
 
 ## Implementing iterables
 
-The objects returned by generators Money iterable; each yield contributes to the sequence of iterated values. Therefore, you can use generators to implement iterables, which can be consumed by various ES6 language mechanisms: for-of loop, spread operator (...), etc.
+The objects returned by generators Title iterable; each yield contributes to the sequence of iterated values. Therefore, you can use generators to implement iterables, which can be consumed by various ES6 language mechanisms: for-of loop, spread operator (...), etc.
 
-Because it's an iterator you can also use the for/of syntax. We can say for(let word of generateJapanFacts) and then log out the word and then run that. You can see the output is basically the same. Language Money Capital The main difference is that this is grabbing the value off of the next.
+Because it's an iterator you can also use the for/of syntax. We can say for(let word of generateHealthBook) and then log out the word and then run that. You can see the output is basically the same. Category Title Pages The main difference is that this is grabbing the value off of the next.
 
 ```javascript
 function* japanFacts() {
-  console.log(`Japan`);
-  yield "Language";
-  console.log(`Japanese`);
-  yield "Money";
-  console.log(`Yen`);
-  yield "Capital";
-  console.log(`Tokyo`);
+  console.log(`Book`);
+  yield "Category";
+  console.log(`Health`);
+  yield "Title";
+  console.log(`The Paleo Solution`);
+  yield "Pages";
+  console.log(`320`);
 }
 
-var generateJapanFacts = japanFacts();
+var generateHealthBook = japanFacts();
 
-for (let word of generateJapanFacts) {
-  console.log(word); // Japan
-  // Language
-  // Japanese
-  // Money
-  // Yen
-  // Capital
-  // Tokyo
+for (let word of generateHealthBook) {
+  console.log(word); // Book
+  // Category
+  // Health
+  // Title
+  // The Paleo Solution
+  // Pages
+  // 320
 }
 ```
 
 To do that by calling next we'd have to revert this and say .value, then run it again and we get the same output.
 
 ```javascript
-console.log(generateJapanFacts.next().value); // Japan
-// Language
-console.log(generateJapanFacts.next().value); // Japanese
-// Money
-console.log(generateJapanFacts.next().value); // Yen
-// Capital
-console.log(generateJapanFacts.next().value); // Tokyo
+console.log(generateHealthBook.next().value); // Book
+// Category
+console.log(generateHealthBook.next().value); // Health
+// Title
+console.log(generateHealthBook.next().value); // The Paleo Solution
+// Pages
+console.log(generateHealthBook.next().value); // 320
 ```
 
 Lastly, generators also help you work with infinite sequences. If I wrap my yield with a while(true), which is never going to stop looping, I can safely yield {x:x, y:y} point knowing confidently that this stuff isn't going to evaluate until the next step through after the yield process.
