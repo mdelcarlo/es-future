@@ -22,7 +22,7 @@ You can pass a parameter to Symbol(), and that is used as the symbol description
 
 ```js
 console.log(Symbol()); //Symbol()
-console.log(Symbol("Some Test")); //Symbol(Some Test)
+console.log(Symbol("Some book")); //Symbol(Some book)
 ```
 
 Symbols are often used to identify object properties.
@@ -32,16 +32,16 @@ Often to avoid name clashing between properties, since no symbol is equal to ano
 Or to add properties that the user cannot overwrite, intentionally or without realizing.
 
 ```js
-const BRAND = Symbol();
-const clothe = {
-  [BRAND]: "Adidas"
+const CATEGORY = Symbol();
+const book = {
+  [CATEGORY]: "Sports"
 };
 
-clothe[BRAND]; //'Adidas'
+book[CATEGORY]; //'Sports'
 
-const COLOR = Symbol();
-clothe[COLOR] = () => "black";
-console.log(clothe[COLOR]()); //'black'
+const TITLE = Symbol();
+book[TITLE] = () => "Extreme ownership";
+console.log(book[TITLE]()); //'Extreme ownership'
 ```
 
 Symbols are not enumerated, which means that they do not get included in a for..of or for..in loop ran upon an object.
