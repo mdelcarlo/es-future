@@ -24,7 +24,7 @@ function myVehicleTag(strings, bookExp, pagesExp) {
   let pagesStr;
   if (pagesExp < 100) {
     pagesStr = "small book";
-  } else (pagesExp < 300) {
+  } else if (pagesExp < 300) {
     pagesStr = "medium book";
   } else {
     pagesStr = "big book";
