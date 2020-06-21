@@ -1,6 +1,6 @@
 # Enhanced Object literals
 
-In ES6 we can set default parameters of our functions.
+In ES6 we can set default parameters to our functions.
 
 Default arguments in ES6 allow you of assign some defaults of these guys. If I run this right now you'll see I'll get undefined, undefined because nothing was passed in for title or author, so when they get logged out they're both undefined.
 
