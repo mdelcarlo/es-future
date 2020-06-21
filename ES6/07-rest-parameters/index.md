@@ -1,74 +1,139 @@
-# Template strings
+# Rest parameters and spread syntax
 
-If you have ever worked with strings in JavaScript, you've most likely concatenated two strings by just saying the variable then plus and then adding a string to it.
+Many JavaScript built-in functions support an arbitrary number of arguments.
 
-```javascript
-var name = "Carol";
-var action = "walking";
-var activity = name + " is " + action;
-console.log(activity);
-```
-
-ES6 allows you to put your variables inside of your string. Template literals are enclosed by the backtick (``) (grave accent) character instead of double or single quotes.
-
-Template literals can contain placeholders. These are indicated by the dollar sign and curly braces (\${expression}). The expressions in the placeholders and the text between the backticks (``) get passed to a function.
-
-The default function just concatenates the parts into a single string. If there is an expression preceding the template literal (tag here), this is called a tagged template. In that case, the tag expression (usually a function) gets called with the template literal, which you can then manipulate before outputting.
-
-I'm going to surround this with a grave. So I'll put one there and I'll put one here.
-
-Then, instead of doing plus and then quote, I'll just surround this guy with the dollar sign, curly brace, and then close curly brace. You'll see if I rerun this, I'll get Carol is walking.
-
-```javascript
-var activity = `${name} is ${action}`;
-```
-
-It actually respects white space even across multiple lines. If I put some lines in here and if I say name, is and action and run this. You'll see I get some blank lines, Carol all the way at the left and then a couple tabs, and then is, and then more blank lines till you get walking.
-
-```javascript
-var activity = `
-
-${name} 
-
-    is
-    
-    ${action}
-`;
-```
-
-It's also worth noting that you can do expressions inside of these braces. If you want to do X + Y, then just show Y and just show X, and then run this. You can see we get 1 + 2 = 3, and then this is one.
-
-```javascript
-var a = 3;
-var b = 5;
-var equation = `${a} * ${b} = ${a * b}`;
-
-console.log(equation); // "3 * 5 = 15"
-```
-
-In certain cases, nesting a template is the easiest (and perhaps more readable) way to have configurable strings. Within a backticked template, it is simple to allow inner backticks simply by using them inside a placeholder \${ } within the template.
-
-For instance, if condition a is true, then return this templated literal.
-
-In ES5:
+For instance:
 
 ```js
-let classes = "header";
-classes += isLargeScreen()
-  ? ""
-  : item.isCollapsed
-  ? " icon-expanded"
-  : " icon-collapsed";
+Math.max(arg1, arg2, ..., argN) – returns the greatest of the arguments.
+Object.assign(dest, src1, ..., srcN) – copies properties from src1..N into dest.
 ```
 
-In ES6 with template literals and without nesting:
+…and so on.
+In this chapter we’ll learn how to do the same. And also, how to pass arrays to such functions as parameters.
+
+## Rest parameters ...
+
+A function can be called with any number of arguments, no matter how it is defined.
+
+Like here:
+
+```
+function sum(a, b) {
+return a + b;
+}
+
+alert( sum(1, 2, 3, 4, 5) );
+```
+
+There will be no error because of “excessive” arguments. But of course in the result only the first two will be counted.
+
+The rest of the parameters can be included in the function definition by using three dots ... followed by the name of the array that will contain them. The dots literally mean “gather the remaining parameters into an array”.
+
+For instance, to gather all arguments into array args:
 
 ```js
-const classes = `header ${
-  isLargeScreen() ? "" : item.isCollapsed ? "icon-expanded" : "icon-collapsed"
-}`;
+function sumAll(...args) {
+  // args is the name for the array
+  let sum = 0;
+
+  for (let arg of args) sum += arg;
+
+  return sum;
+}
+
+alert(sumAll(1)); // 1
+alert(sumAll(1, 2)); // 3
+alert(sumAll(1, 2, 3)); // 6
 ```
 
-In ES6 with nested template literals:
+We can choose to get the first parameters as variables, and gather only the rest.
 
-const classes = `header ${ isLargeScreen() ? '' :`icon-\${item.isCollapsed ? 'expanded' : 'collapsed'}`}`;
+Here the first two arguments go into variables and the rest go into titles array:
+
+```js
+function showName(firstName, lastName, ...titles) {
+  alert(firstName + " " + lastName); // Julius Caesar
+
+  // the rest go into titles array
+  // i.e. titles = ["Consul", "Imperator"]
+  alert(titles[0]); // Consul
+  alert(titles[1]); // Imperator
+  alert(titles.length); // 2
+}
+
+showName("Julius", "Caesar", "Consul", "Imperator");
+```
+
+The rest parameters must be at the end
+The rest parameters gather all remaining arguments, so the following does not make sense and causes an error:
+
+```js
+function f(arg1, ...rest, arg2) { // arg2 after ...rest ?!
+// error
+}
+```
+
+The ...rest must always be last.
+
+The “arguments” variable
+There is also a special array-like object named arguments that contains all arguments by their index.
+
+For instance:
+
+```js
+function showName() {
+  alert(arguments.length);
+  alert(arguments[0]);
+  alert(arguments[1]);
+
+  // it's iterable
+  // for(let arg of arguments) alert(arg);
+}
+
+// shows: 2, Julius, Caesar
+showName("Julius", "Caesar");
+
+// shows: 1, Ilya, undefined (no second argument)
+showName("Ilya");
+```
+
+In old times, rest parameters did not exist in the language, and using arguments was the only way to get all arguments of the function. And it still works, we can find it in the old code.
+
+But the downside is that although arguments is both array-like and iterable, it’s not an array. It does not support array methods, so we can’t call arguments.map(...) for example.
+
+Also, it always contains all arguments. We can’t capture them partially, like we did with rest parameters.
+
+So when we need these features, then rest parameters are preferred.
+
+Arrow functions do not have "arguments"
+If we access the arguments object from an arrow function, it takes them from the outer “normal” function.
+
+Here’s an example:
+
+```js
+function f() {
+  let showArg = () => alert(arguments[0]);
+  showArg();
+}
+
+f(1); // 1
+```
+
+As we remember, arrow functions don’t have their own this. Now we know they don’t have the special arguments object either.
+
+## Summary
+
+When we see "..." in the code, it is either rest parameters or the spread syntax.
+
+There’s an easy way to distinguish between them:
+
+When ... is at the end of function parameters, it’s “rest parameters” and gathers the rest of the list of arguments into an array.
+When ... occurs in a function call or alike, it’s called a “spread syntax” and expands an array into a list.
+Use patterns:
+
+- Rest parameters are used to create functions that accept any number of arguments.
+- The spread syntax is used to pass an array to functions that normally require a list of many arguments.
+- Together they help to travel between a list and an array of parameters with ease.
+
+All arguments of a function call are also available in “old-style” arguments: array-like iterable object.
