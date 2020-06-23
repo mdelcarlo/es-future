@@ -48,18 +48,18 @@ class Book {
   constructor(cat) {
     this.category = cat;
   }
-  static shutDown() {
-    return "Shutting!!";
+  static getTitle() {
+    return "I don't have a title yet!!";
   }
 }
 
 myBook = new Book("Sports");
 
-//Call 'shutDown()' on the class Book:
-Book.shutDown();
+//Call 'getTitle()' on the class Book:
+Book.getTitle();
 
 //and NOT on the 'myBook' object:
-//myBook.shutDown();
+//myBook.getTitle();
 //this would raise an error.
 ```
 
