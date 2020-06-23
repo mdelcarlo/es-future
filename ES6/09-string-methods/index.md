@@ -4,17 +4,17 @@ The String type in ES6 has come with four new methods that are really handy, hel
 
 ## .startsWith() and .endsWith()
 
-So I have a const variable named category, which has the value of science, this stands for React for Beginners.
+So I have a const variable named category, which has the value of science.
 
 ```js
 const category = "science";
 ```
 
-Sometimes I have science which is the category, google which is other category, netflix which is another category. I don't really care too much about that in certain cases, I just want to know if category starts with face, and not something like goo, which is google.
+Sometimes I have science which is the category, sport which is other category, history which is another category. I don't really care too much about that in certain cases, I just want to know if category starts with his, and not something like sp, which is sport.
 
-We can use the console to check this out by typing category.startsWith('FACE'), it will return true, because obviously it does start with it.
+We can use the console to check this out by typing category.startsWith('sc'), it will return true, because obviously it does start with it.
 
-If I did face, in lowercase letters, it says, false, because there is no way to author this case insensitive. If you do need case sensitivity you must still use a Regular Expression.
+If I did his, in lowercase letters, it says, false, because there is no way to author this case insensitive. If you do need case sensitivity you must still use a Regular Expression.
 
 One other thing that .startsWith() will do is it'll allow you to skip a certain number of characters and start looking at a set point.
 
@@ -61,7 +61,7 @@ const title = "Manual for Living";
 
 I'm going to show you where that would be useful for using .repeat(), which allows you to take a string, and repeat it. You can just call .repeat() and it's going to repeat that string over and over and over again.
 
-Where is that useful? Sometimes we have some words here. I'm going to take my Epictetus, Non fiction and crimson red, and if I wanted to display the variables in a terminal or something, but I want to right align them. How would that work? I'd have to just put a whole bunch of padding in, depending on how long this was and how much space will be used, kind of like this:
+Where is that useful? Sometimes we have some words here. I'm going to take my Epictetus, Non fiction and manual of living, and if I wanted to display the variables in a terminal or something, but I want to right align them. How would that work? I'd have to just put a whole bunch of padding in, depending on how long this was and how much space will be used, kind of like this:
 
                  Epictetus
                   Non fiction
@@ -72,18 +72,21 @@ What we can do, instead of hitting the space bar each time, we can use a left pa
 Here we can return a string, and we need to then pad it with however many characters we need. We'll take a space and repeat it 10 times.
 
 ```js
-leftPad = function(str, length = 10){
-  return `${' '.repeat(length)}${str}`;
-}
+leftPad = function(str, length = 10) {
+  return `${" ".repeat(length)}${str}`;
+};
 
 console.log(leftPad(author)); // ' Epictetus'
 console.log(leftPad(category)); // ' Non fiction'
 console.log(leftPad(title)); // ' Manual for Living'
+```
+
 However, if we want it right aligned, we'll need to subtract however many characters are in the string, so we subtract str.length here before we return the actual string itself in \${str};
 
-leftPad = function(str, length = 20){
-  return `${' '.repeat(Math.max(length - str.length,0))}${str}`;
-}
+```js
+leftPad = function(str, length = 20) {
+  return `${" ".repeat(Math.max(length - str.length, 0))}${str}`;
+};
 ```
 
 I can take author, category, and color, put them in here. It's going to console.log each one of them out. I'm going to leave out the length because we're going to default it to 20, and it should just pass in the author, category, and color.
@@ -94,4 +97,4 @@ console.log(leftPad(category)); // ' Non fiction'
 console.log(leftPad(title)); // ' Manual for Living'
 ```
 
-There we go. See how all these are perfectly right aligned? Epictetus Non fiction in crimson red, whereas all of this is however much padding we actually need. That's a nice little use for repeat.
+There we go. See how all these are perfectly right aligned? Epictetus Non fiction in manual of living, whereas all of this is however much padding we actually need. That's a nice little use for repeat.
