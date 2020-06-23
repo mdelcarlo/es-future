@@ -10,7 +10,7 @@ A Promise is in one of these states:
 - **fulfilled**: meaning that the operation completed successfully.
 - **rejected**: meaning that the operation failed.
 
-To get started, we'll go ahead and create a new variable, which we'll just call d, and we'll set that equal to a new Promise(). The callback inside of a promise takes two arguments, resolve and reject. You'll notice that we're using the ES6 arrow function syntax throughout this project.
+To get started, we'll go ahead and create a new variable, which we'll just call promise, and we'll set that equal to a new Promise(). The callback inside of a promise takes two arguments, resolve and reject. You'll notice that we're using the ES6 arrow function syntax throughout this project.
 
 ```javascript
 var promise = new Promise((resolve, reject) => {});
@@ -32,7 +32,7 @@ var promise = new Promise((resolve, reject) => {
 });
 ```
 
-Let's go ahead and build the basic if-else statement here. Inside the i- statement, we'll go ahead and resolve the promise. We'll pass in a string of promise solved. Inside the else statement, let's reject the promise, and we'll just pass in a string of, oops! promise rejected :( .
+Let's go ahead and build the basic if-else statement here. Inside the if statement, we'll go ahead and resolve the promise. We'll pass in a string of promise solved. Inside the else statement, let's reject the promise, and we'll just pass in a string of, oops! promise rejected :( .
 
 Now, because we're just evaluating the Boolean true inside this if-statement, we know that our resolve is going to fire. To get an idea of what this is going to look like, let's go down to our promise.then().
 
