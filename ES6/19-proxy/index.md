@@ -69,6 +69,6 @@ const handler3 = {
 
 const proxy3 = new Proxy(books, handler3);
 
-console.log(proxy3.book1); // Sapiens
-console.log(proxy3.book2); // 21 lessons for 21 century
+console.log(proxy3.book1);
+console.log(proxy3.book2);
 ```

@@ -4,14 +4,13 @@ You can think of generators as processes (pieces of code) that you can pause and
 
 ```JS
 function* genFunc() {
-    // (A)
     console.log('First chapter');
     yield;
     console.log('Second chapter');
 }
 ```
 
-Note the new syntax: function\* is a new “keyword” for generator functions (there Title also generator methods). yield is an operator with which a generator can pause itself. Additionally, generators can also receive input and send output via yield.
+Note the new syntax: `function*` is a new “keyword” for generator functions (there are also generator methods). yield is an operator with which a generator can pause itself. Additionally, generators can also receive input and send output via yield.
 
 When you call a generator function genFunc(), you get a generator object genChapter that you can use to control the process:
 
@@ -30,12 +29,12 @@ genChapter.next();
 
 ## Implementing iterables
 
-The objects returned by generators Title iterable; each yield contributes to the sequence of iterated values. Therefore, you can use generators to implement iterables, which can be consumed by various ES6 language mechanisms: for-of loop, spread operator (...), etc.
+The objects returned by generators are iterable; each yield contributes to the sequence of iterated values. Therefore, you can use generators to implement iterables, which can be consumed by various ES6 language mechanisms: for-of loop, spread operator (...), etc.
 
 Because it's an iterator you can also use the for/of syntax. We can say for(let word of generateHealthBook) and then log out the word and then run that. You can see the output is basically the same. Category Title Pages The main difference is that this is grabbing the value off of the next.
 
 ```javascript
-function* japanFacts() {
+function* genBook() {
   console.log(`Book`);
   yield "Category";
   console.log(`Health`);
@@ -45,7 +44,7 @@ function* japanFacts() {
   console.log(`320`);
 }
 
-var generateHealthBook = japanFacts();
+var generateHealthBook = genBook();
 
 for (let word of generateHealthBook) {
   console.log(word); // Book
