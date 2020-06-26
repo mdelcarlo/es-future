@@ -12,7 +12,7 @@ In JavaScript, it is impossible to write an ambiguous exponentiation expression;
 
 ```js
 (-2) ** 2;
-// 4 in Bash, -4 in other languages.
+// 4 in Bash, -4 in other languages.a **b
 // This is invalid in JavaScript, as the operation is ambiguous.
 
 -(2 ** 2);
