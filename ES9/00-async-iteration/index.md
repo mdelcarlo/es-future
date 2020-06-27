@@ -45,14 +45,10 @@ async function* streamAsyncIterable(stream) {
   }
 }
 
-// Fetches data from url and calculates response size using the async generator.
 async function getResponseSize(url) {
   const response = await fetch(url);
-  // Will hold the size of the response, in bytes.
   let responseSize = 0;
-  // The for-await-of loop. Async iterates over each portion of the response.
   for await (const chunk of streamAsyncIterable(response.body)) {
-    // Incrementing the total response length.
     responseSize += chunk.length;
   }
 
@@ -60,7 +56,27 @@ async function getResponseSize(url) {
   return responseSize;
 }
 
-getResponseSize("https://api.github.com/users/mdelcarlo"); // expected output: "Response Size: 1326 bytes"
+getResponseSize("https://api.github.com/users/mdelcarlo");
 ```
 
 As we are getting the data as chunks we need to add the length of every chuck to get the total response size.
+
+```js
+import fs from "fs";
+import readline from "readline";
+
+async function processLineByLine(filePath) {
+  const fileStream = fs.createReadStream(filePath);
+
+  const rl = readline.createInterface({
+    input: fileStream,
+    crlfDelay: Infinity
+  });
+
+  for await (const line of rl) {
+    console.log(`Line from file: ${line}`);
+  }
+}
+
+processLineByLine("./index.mjs");
+```
