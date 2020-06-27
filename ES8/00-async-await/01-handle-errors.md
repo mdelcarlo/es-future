@@ -36,4 +36,4 @@ try {
 }
 ```
 
-So in order to capture the error we surround showGithubUser function on try and we catch the posible errors, whenever we get an eeror we log the message.
+So in order to capture the error we surround showGithubUser function on try and we catch the posible errors, whenever we get an error we log the message.

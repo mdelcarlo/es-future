@@ -17,9 +17,12 @@ function showGithubUser(name) {
 showGithubUser("mdelcarlo");
 ```
 
-The await operator takes a promise and then pauses the function execution until that promise is settled. It then does one of two things. If the promise is rejected, the await expression throws the rejected value.
+The await operator takes a promise and then pauses the function execution until that promise is settled.
 
-If the promise is resolved, the await expression will return the resolved value. We can then take it and assign it to a variable like this.
+It then does one of two things:
+
+1 - If the promise is rejected, the await expression throws the rejected value.
+2 - If the promise is resolved, the await expression will return the resolved value. We can then take it and assign it to a variable like this.
 
 The next thing we want to do is take the body of the response and parse it as JSON. We'll say, "Const user equals await response at JSON."
 
