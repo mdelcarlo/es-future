@@ -47,26 +47,33 @@ For instance, if we have the following module say.js:
 ```js
 // 📁 say.js
 export function hi() {
-  alert(`Hello`);
+  console.log(`Hello`);
 }
 
 export function bye() {
-  alert(`Bye`);
+  console.log(`Bye`);
 }
 ```
 
 Then dynamic import can be like this:
 
 ```js
-let {hi, bye} = await import('./say.js');
+async function run() {
+  let { hi, bye } = await import("./say.mjs");
 
-hi();
-bye();
+  hi();
+  bye();
+}
+
+run();
+```
+
 Or, if say.js has the default export:
 
+```js
 // 📁 say.js
 export default function() {
-    alert("Module loaded (export default)!");
+  console.log("Module loaded (export default)!");
 }
 ```
 
