@@ -15,11 +15,11 @@ function /* my es10 course */ es10() {}
 The behavior was this:
 
 ```js
-es10.toString(); //'function es10() {}
+es10.toString(); //function es10() {}
 ```
 
 now the new behavior is:
 
 ```js
-es10.toString(); // 'function /* my es10 course */ es10 () {}'
+es10.toString(); // function /* my es10 course */ es10 () {}'
 ```
