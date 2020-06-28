@@ -1,5 +1,7 @@
 # Symbol.prototype.description
 
+ES2019 added symbol description property.
+
 The read-only description property is a string returning the optional description of Symbol objects.
 
 ```js
