@@ -2,7 +2,7 @@
 
 Let is a variable block-scoped binding construct. `let` is the new `var`.
 
-A long-standing gotcha with JavaScript is how var works. If I have this bookTitle assigned to 5, and I have this bookTitle assigned to The fountainhed'', you'd probably think, "This one's inside of a block so it should have no impact on what this bookTitle does up here." But if I run this, you'll actually see that that isn't the case. The fountainhed'' is being logged out because this is the same bookTitle, and it's being reassigned to The fountainhed''.
+A long-standing gotcha with JavaScript is how var works. If I have this bookTitle assigned to Anthem, and I have this bookTitle assigned to The fountainhed'', you'd probably think, "This one's inside of a block so it should have no impact on what this bookTitle does up here." But if I run this, you'll actually see that that isn't the case. The fountainhed'' is being logged out because this is the same bookTitle, and it's being reassigned to The fountainhed''.
 
 ```javascript
 var bookTitle = "Anthem";
