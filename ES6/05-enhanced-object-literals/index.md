@@ -51,9 +51,9 @@ Prior to ES6, the syntax for writing methods in objects is this:
 //ES5
 function getBook(title, author, year) {
   return {
-    sayAuthor: function() {
+    sayAuthor: function () {
       return author;
-    }
+    },
   };
 }
 
@@ -63,12 +63,12 @@ getBook("Death on the Nile", "Agatha Christie", "1937").sayAuthor(); //"Agatha C
 With ES6, we don't have to write much code just to get a method to work.
 
 ```js
-//ES5
+//ES6
 function getBook(title, author, year) {
   return {
     sayAuthor() {
       return author;
-    }
+    },
   };
 }
 
@@ -86,7 +86,7 @@ Whatever the expression evaluates to will become the property name. This means t
 ```js
 var name = "title";
 const book = {
-  [name]: "Death on the Nile"
+  [name]: "Death on the Nile",
 };
 
 console.log(book.title); //"Death on the Nile"
@@ -102,7 +102,7 @@ var i = 0;
 const book = {
   [name + ++i]: "Death on the Nile",
   [name + ++i]: "Curtain",
-  [name + ++i]: "The Big Four"
+  [name + ++i]: "The Big Four",
 };
 
 console.log(book.title1); //"Death on the Nile"
