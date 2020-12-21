@@ -1,4 +1,3 @@
-
     var promise = new Promise((resolve, reject) => {
       throw new Error("error thrown!");
       setTimeout(() => {
